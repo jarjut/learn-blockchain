@@ -1,7 +1,7 @@
 const SHA256 = require('crypto-js/sha256');
 
 class Block {
-    constructor(data,previousHash) {
+    constructor(data, previousHash) {
         this.data = data
         this.previousHash = previousHash
     }
@@ -11,7 +11,9 @@ class Block {
     }
 
     toHash() {
-        return SHA256(this.data + this.previousHash)
+        let dataHash = this.data
+        if (this.previousHash) dataHash += this.previousHash
+        return SHA256(dataHash)
     }
 }
 
